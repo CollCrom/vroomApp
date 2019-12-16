@@ -19,3 +19,8 @@
     padding: 0px;
     margin-top: 10px;
 }
+
+.dayOfWeek {
+    font-weight: bold;
+    font-size: 20px;
+}
