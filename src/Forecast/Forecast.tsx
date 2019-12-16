@@ -3,7 +3,7 @@ import { getWeather } from '../getWeather.service';
 import { WeatherProps, FiveDayForecast, fiveDayForecastInitState, OneDayForecast } from '../app.interface';
 import { isEqual } from 'lodash';
 import moment from 'moment';
-import '../CurrentWeather/CurrentWeather.css';
+import './Forecast.css';
 
 const Forecast: React.FC<WeatherProps> = (props) => {
 
@@ -41,7 +41,7 @@ const Forecast: React.FC<WeatherProps> = (props) => {
   const forecastCards = state.fiveDayForecast.map((oneDayForecast: OneDayForecast, i: number) => {
     const imageUrl = `http://openweathermap.org/img/wn/${oneDayForecast.icon}@2x.png`
     return (
-      <ul key={i} className='weatherCard'>
+      <ul key={i} className='forecastCard'>
         <div>
           Date: {oneDayForecast.date}
         </div>
@@ -64,7 +64,7 @@ const Forecast: React.FC<WeatherProps> = (props) => {
 
   return (
     <>
-      <ul>{forecastCards}</ul>
+      <ul className='forecastCards'>{forecastCards}</ul>
     </>
   )
 }

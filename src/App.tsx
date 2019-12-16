@@ -32,14 +32,14 @@ const App: React.FC = () => {
   const getLocation = (): void => {
     const options = {
         enableHighAccuracy: true,
-        timeout: 10000,
+        timeout: 100,
         maximumAge: 0
     }
     navigator.geolocation
       ? navigator.geolocation.getCurrentPosition(getPosition, locationErrorHandler, options)
       : console.warn('Could not get Location')
   }
-  const handleChange = () => {
+  const handleChange = (event: any) => {
     setState({
       ...state,
       showCurrentWeather: !state.showCurrentWeather
@@ -49,7 +49,9 @@ const App: React.FC = () => {
   getLocation()
   return (
     <>
-      <div onClick={handleChange}>Get {state.showCurrentWeather ? 'Five Day Forecast' : 'Current Weather'}</div>
+      <button onClick={handleChange} className='toggle'>
+        Get {state.showCurrentWeather ? 'Five Day Forecast' : 'Current Weather'}
+      </button>
       {state.showCurrentWeather ? <CurrentWeather 
         longitude = {state.coords.longitude}
         latitude = {state.coords.latitude}
