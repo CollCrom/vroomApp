@@ -1,11 +1,12 @@
-export const AppInitState: LocalCoordinates = {
+export const appInitState = {
+    showCurrentWeather: true,
     coords: {
         longitude: 0,
         latitude: 0
     }
 }
 
-export const CurrentWeatherInitState: CurrentWeatherState = {
+export const currentWeatherInitState: CurrentWeatherState = {
     name: '',
     main: {
         feels_like: 0,
@@ -16,6 +17,21 @@ export const CurrentWeatherInitState: CurrentWeatherState = {
         temp_min: 0
     },
     weather: []
+}
+
+export const fiveDayForecastInitState: FiveDayForecast = {
+    fiveDayForecast: []
+}
+
+export interface FiveDayForecast {
+    fiveDayForecast: OneDayForecast[];
+}
+
+export interface OneDayForecast {
+    date: string;
+    max: number;
+    min: number;
+    icon: string;
 }
 
 export interface CurrentWeatherState {
@@ -64,6 +80,26 @@ export interface WeatherReport {
     }
 }
 
+export interface ForecastReport {
+    city: {
+        coord: {
+            lat: number;
+            long: number;
+        }
+        country: string;
+        id: number;
+        name: string;
+        population: string;
+        sunrise: string;
+        sunset: string;
+        timezone: string
+    };
+    cnt: number;
+    cod: string;
+    list: WeatherReport[];
+    message: number;
+}
+
 export interface WeatherArray {
     description: string;
     icon: string;
@@ -71,6 +107,7 @@ export interface WeatherArray {
     main: string;
 }
 export interface LocalCoordinates {
+    
     coords: {
         longitude: number;
         latitude: number;

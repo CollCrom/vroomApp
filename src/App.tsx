@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 import CurrentWeather from './CurrentWeather/CurrentWeather';
-import { LocalCoordinates, AppInitState } from './app.interface'
+import { LocalCoordinates, appInitState } from './app.interface'
 import { isEqual } from 'lodash'
 import Forecast from './Forecast/Forecast';
 
 const App: React.FC = () => {
 
-  const [state, setState]: [LocalCoordinates, any] = useState(AppInitState)
+  const [state, setState] = useState(appInitState)
 
   const getPosition = (position: LocalCoordinates): void => {
     const { coords: { longitude, latitude }} = position
@@ -39,18 +39,24 @@ const App: React.FC = () => {
       ? navigator.geolocation.getCurrentPosition(getPosition, locationErrorHandler, options)
       : console.warn('Could not get Location')
   }
+  const handleChange = () => {
+    setState({
+      ...state,
+      showCurrentWeather: !state.showCurrentWeather
+    })
+  }
 
   getLocation()
   return (
     <>
-      <CurrentWeather 
+      <div onClick={handleChange}>Get {state.showCurrentWeather ? 'Five Day Forecast' : 'Current Weather'}</div>
+      {state.showCurrentWeather ? <CurrentWeather 
         longitude = {state.coords.longitude}
         latitude = {state.coords.latitude}
-      />
-      <Forecast
+      /> : <Forecast
         longitude = {state.coords.longitude}
         latitude = {state.coords.latitude}
-      />
+      />}
     </>
   );
 }
